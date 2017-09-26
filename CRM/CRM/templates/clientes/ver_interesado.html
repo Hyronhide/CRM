@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Ver Perfil
+{% endblock  %}
+
+{% block content %}
+	<div class="row content-header">
+	<div class="container">
+	  <div  id="contenedor" class="col s12 m6 l12">
+		<div id="car" class="card z-depth-3 hoverable">
+			
+			<h5 id="cn" align="center ">PERFIL <a href="/interesado_a_paciente/{{interesado.id}}">(Actualizar a paciente)</a></h5>
+			<div class="divider"></div><br>
+			<h5 id="cn" align="center ">{{ informacion }}</h5>
+			
+			<br>
+			<font size="4">
+				<p><b>Nombres: </b>{{ interesado.nombres }}</p>
+				<p><b>Apellidos: </b>{{ interesado.apellidos }}</p>
+				<p><b>Cedula: </b>{{ interesado.cedula }}</p>
+				<p><b>Correo: </b>{{ interesado.correo }}</p>
+				<p><b>Movil: </b>{{ interesado.movil }}</p>
+				<p><b>Teléfono: </b>{{ interesado.telefono }}</p>
+				<p><b>Departamento: </b>{{ interesado.departamento }}</p>
+				<p><b>Ciudad: </b>{{ interesado.ciudad }}</p>
+				<p><b>Direccion: </b>{{ interesado.direccion }}</p>					
+				<p><b>Procedencia: </b>{{ interesado.interesado.procedencia }}</p>
+				<!--<p><b>Nivel de interes: </b>{{ interesado.interesado.nivel_interes }}</p>-->
+				<br><div class="divider"></div>
+				<form action="." method = "POST" enctype="multipart/form-data">
+					{% csrf_token %}
+					{{ form.as_p }}
+					<br>					
+					<center>
+						<button  type="submit" class="btn"> Aplicar Cambios </button>				
+									
+				</form>
+
+				{% if info_enviado %}
+					<a class="btn" href="javascript:window.history.go(-2);" float="left">Volver</a>
+				{% else %}
+					<a class="btn" href="javascript:window.history.back();" float="left">Volver</a>	
+				{% endif %}
+				</center>
+			</font>
+			
+			<br>
+			<!--<center>					
+				<a href="javascript:window.history.back();" class="btn btn-sm btn-curious-blue-variant-1">Volver</a>
+			<center>-->    	
+			
+		</div>
+	   </div>
+	</div>
+</div>
+{% endblock  %}

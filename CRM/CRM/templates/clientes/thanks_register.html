@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Registro 
+{% endblock  %}
+
+{% block content %}
+	
+	<div class="row content-header">
+	<div class="container">
+      <div  id="contenedor" class="col s12 m12 l12">
+        <div id="car" class="card z-depth-3 hoverable" >
+			<h5 id="cn" align="center "><p>Paciente Registrado</p></h5>
+			<div class="divider"></div><br>
+			<br>
+			<font size="4">
+				<p><b>Nombres: </b>{{ paciente.nombres }}</p>
+				<p><b>Apellidos: </b>{{ paciente.apellidos }}</p>
+				<p><b>Cedula: </b>{{ paciente.cedula }}</p>
+				<p><b>Correo: </b>{{ paciente.correo }}</p>
+				<p><b>Movil: </b>{{ paciente.movil }}</p>
+				<p><b>Teléfono: </b>{{ paciente.telefono }}</p>
+				<p><b>Departamento: </b>{{ paciente.departamento }}</p>
+				<p><b>Ciudad: </b>{{ paciente.ciudad }}</p>
+				<p><b>Direccion: </b>{{ paciente.direccion }}</p>
+				<p><b>Genero: </b>{{ paciente.paciente.genero }}</p>
+				<p><b>Grupo Sanguineo: </b>{{ paciente.paciente.grupo_sanguineo }}</p>
+				<p><b>Fecha de nacimiento: </b>{{ paciente.paciente.fecha_nacimiento }}</p>
+				
+			</font>
+			<br><div class="divider"></div>
+			<br>
+			<center>					
+				<a href="{% url 'vista_registrar_paciente' %}" class="btn btn-sm btn-curious-blue-variant-1">Volver a Registro</a>
+			</center>							
+		</div>
+	</div>
+</div>
+</div>
+	
+{% endblock  %}
