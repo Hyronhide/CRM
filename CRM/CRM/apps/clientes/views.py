@@ -450,7 +450,32 @@ def interesado_a_paciente_view(request,id_interesado):
 	ctx = {'form_paciente':form_paciente,'paciente':per}
 	return render_to_response('clientes/interesado_a_paciente.html',ctx,context_instance=RequestContext(request))
 
-######################################################################################################
+def oportunidades_view(request):
+	lista_interesados = Interesado.objects.filter(persona__tipo="Interesado",nivel_interes= "5: Muy alto")
+	primera = "<<Primera"
+	ultima = "Ultima>>"	
+	#lista_prod = Producto.objects.filter(status = True)#SELECT * from Producto WHERE status= True
+	paginator = Paginator(lista_interesados, 3) 
+	try:
+		page = int(pagina)
+	except:
+		page = 1
+	try:
+		interesados = paginator.page(page)
+	except (EmptyPage,InvalidPage):
+		interesados = paginator.page(paginator.num_pages)	
+
+
+	return render_to_response('clientes/oportunidades.html', {
+		#"results": results,
+		#"query": query,
+		#"mostrar": mostrar,
+		"interesados":interesados,
+		"lista_interesados":lista_interesados, 
+		"primera":primera,
+		"ultima":ultima,       
+	},context_instance=RequestContext(request))	
+########################################### FIN INTERESADOS ##################################################
 
 ########################################### REPORTES #################################################
 
@@ -526,6 +551,8 @@ def reporte_exel_interesados_view(request):
 	ws['J1'] = 'DIRECCION'
 	ws['K1'] = 'PROCEDENCIA'
 	ws['L1'] = 'NIVEL INTERES'
+	ws['M1'] = 'PRODUCTO'
+	ws['N1'] = 'VALOR ESTIMADO'
 	     
 	cont=2
 	#Recorremos el conjunto de personas y vamos escribiendo cada uno de los datos en las celdas
@@ -541,6 +568,8 @@ def reporte_exel_interesados_view(request):
 		ws.cell(row=cont,column=10).value = persona.direccion
 		ws.cell(row=cont,column=11).value = persona.interesado.procedencia
 		ws.cell(row=cont,column=12).value = persona.interesado.nivel_interes
+		ws.cell(row=cont,column=13).value = persona.interesado.producto.nombre
+		ws.cell(row=cont,column=14).value = persona.interesado.producto.precio
 		cont = cont + 1
 	#Establecemos el nombre del archivo
 	nombre_archivo ="ReporteInteresados.xlsx"
@@ -550,3 +579,77 @@ def reporte_exel_interesados_view(request):
 	response["Content-Disposition"] = contenido
 	wb.save(response)
 	return response						
+
+######################################################################################################
+
+########################################### PRODUCTOS #################################################
+def single_product_view(request, id_prod): 
+	prod = Producto.objects.get(id = id_prod)#SELECT * from Producto WHERE Producto.id = id_prod 	
+	ctx={'producto':prod}
+	return render_to_response('clientes/single_producto.html',ctx,context_instance = RequestContext(request))
+
+def productos_view(request,pagina): 
+	lista_prod = Producto.objects.all().order_by('nombre')
+	primera = "<<Primera"
+	ultima = "Ultima>>"	
+	paginator = Paginator(lista_prod, 3) 
+	try:
+		page = int(pagina)
+	except:
+		page = 1
+	try:
+		productos = paginator.page(page)
+	except (EmptyPage,InvalidPage):
+		productos = paginator.page(paginator.num_pages)
+
+	ctx={'productos':productos,'primera':primera,'ultima':ultima}
+	return render_to_response('clientes/productos.html',ctx,context_instance = RequestContext(request))	
+
+def add_product_view(request):
+	info = "inicializando"
+	if request.method == "POST":
+		formulario = add_product_form(request.POST, request.FILES)
+		if formulario.is_valid():
+			add = formulario.save(commit = False)
+			add.status = True
+			add.save() # guarda la informacion
+			#formulario.save_m2m() # guarda las relaciones ManyToMany
+			info = "Guardado Satisfactoriamente"
+			#return HttpResponseRedirect ('/')
+			return HttpResponseRedirect ('/producto/%s' %add.id)
+	else:
+		formulario = add_product_form()
+	ctx = {'form':formulario, 'informacion':info}	
+	return render_to_response('clientes/add_producto.html',ctx,context_instance = RequestContext(request))	
+
+def edit_product_view(request, id_prod):
+	info = ""
+	prod = Producto.objects.get(pk = id_prod)
+	if request.method == "POST":
+		formulario = add_product_form(request.POST, request.FILES, instance = prod)
+		if formulario.is_valid():
+			edit_prod = formulario.save(commit = False)
+			#formulario.save_m2m()
+			edit_prod.status = True
+			edit_prod.save()
+			info = "Guardado Satisfactoriamente"
+			#return HttpResponseRedirect ('/')
+			return HttpResponseRedirect ('/producto/%s'% edit_prod.id)
+	else:
+		formulario = add_product_form(instance = prod)
+	ctx = {'form':formulario, 'informacion':info}	
+	return render_to_response('clientes/edit_producto.html',ctx,context_instance = RequestContext(request))	
+
+def del_product_view(request, id_prod):
+	info = "inicializando"
+	try:
+		prod = Producto.objects.get(pk = id_prod)
+		prod.delete()
+		info = "Producto Eliminado Correctamente"
+		return HttpResponseRedirect('/productos/')
+	except:
+		info = "Producto no se puede Eliminar"
+		#return render_to_response('home/productos.html', context_instance = RequestContext(request))
+		return HttpResponseRedirect('/productos/')
+
+

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Oportunidades
+{% endblock %}
+
+{% block content %}
+	<h2>Interesados con mayor nivel de interes</h2>
+	<br>	
+	{% if interesados %}						
+			<!--<li> Tipo de pqrs:{{ p.tipo_pqrs}}; Mensaje: {{ p.mensaje}}</li>-->
+	<table class="col s12 bordered responsive-table highlight">
+		<theader>
+			<tr>
+				<th>Nombres</th>	
+				<th>Apellidos</th>										
+				<th>Cedula</th>
+				<th>Teléfono</th>
+				<th>Producto</th>
+				<th>Valor Estimado</th>
+				<th>Nivel Interes</th>
+				<th></th>
+				<th></th>
+				<th></th>												
+			</tr>
+		</theader>					
+		<tbody>
+			{% for i in interesados %}
+			<tr>
+				<td>{{ i.persona.nombres }}</td>
+				<td>{{ i.persona.apellidos }}</td>				
+				<td>{{ i.persona.cedula }}</td>	
+				<td>{{ i.persona.movil }}</td>
+				<td>{{ i.producto.nombre }}</td>	
+				<td>{{ i.producto.precio }}</td>
+				<td>{{ i.nivel_interes}}</td>				
+				<td><a class="btn" href="/ver_interesado/{{i.id}}" title="">Ver</a></td>					
+				</td>					
+			</tr>
+			{% endfor %}			
+		</tbody>							
+	</table>
+	
+	<br>
+	{% else %}
+		<h4>No se existen interesados con un nivel muy alto de interes</h4>				
+	{% endif %}
+	{% if interesados %}
+	<div class = "pagination">
+		<div class = "pagination pagination-centered">
+			<ul class="pag">
+				<li><a href="/interesados/page/1"> {{primera}} </a></li>
+				{% if interesados.has_previous %}
+					<li><a href="/interesados/page/{{ interesados.previous_page_number }}" > Anterior</a></li>
+				{% else %}
+					<li ><a href="#">Anterior</a></li>
+				{% endif %}
+
+				{% if interesados.has_next %}
+					<li><a href="/interesados/page/{{ interesados.next_page_number }}" > Siguiente</a></li>
+				{% else %}
+					<li><a href="#"> Siguiente</a></li>	
+				{% endif %}
+					<li><a href="/interesados/page/{{ interesados.paginator.num_pages }}"> {{ultima}} </a></li>
+			</ul>			
+		</div>		
+	</div>
+	<br>	
+	<h5>Pagina {{ interesados.number }} de {{ interesados.paginator.num_pages }}</h5>
+	{% endif %}		
+	
+	<br>
+	<center>
+		<!--<a href="{% url 'vista_index' %}">Ir al inicio</a><br>-->
+		<!--<a href="{% url 'vista_reporte_exel_interesados' %}">(Generar reporte)</a>-->
+	</center>
+
+{% endblock  %}	

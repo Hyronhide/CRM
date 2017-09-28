@@ -21,9 +21,17 @@ urlpatterns = [
 	url(r'^eliminar_interesado/(?P<id_interesado>.*)/$',eliminar_interesado_view , name = 'vista_eliminar_interesado'),
 	url(r'^confirmar_eliminar_interesado/(?P<id_interesado>.*)/$',confirmar_eliminar_interesado_view , name = 'vista_confirmar_eliminar_interesado'),
 	url(r'^interesado_a_paciente/(?P<id_interesado>.*)/$',interesado_a_paciente_view, name = 'vista_interesado_a_paciente'),
+	url(r'^oportunidades/$',oportunidades_view, name = 'vista_oportunidades'),
+
 	### REPORTES ###
 	url(r'^reporte_exel_pacientes/$',reporte_exel_pacientes_view, name = 'vista_reporte_exel_pacientes'),
 	url(r'^reporte_exel_interesados/$',reporte_exel_interesados_view, name = 'vista_reporte_exel_interesados'),
+	### PRODUCTOS ###
+	url(r'^productos/page/(?P<pagina>.*)/$',productos_view , name = 'vista_productos'),
+	url(r'^producto/(?P<id_prod>.*)/$',single_product_view, name = 'vista_single_producto'),
+	url(r'^add/producto/$',add_product_view,name = 'vista_agregar_producto'),
+	url(r'^edit/producto/(?P<id_prod>.*)/$',edit_product_view, name = 'vista_editar_producto'),
+	url(r'^del/producto/(?P<id_prod>.*)/$',del_product_view, name = 'vista_eliminar_producto'),
 	### USUARIOS ###
 	url(r'^user/$',user_view, name = 'vista_user'),
 	url(r'^edit_user/$',edit_user_view, name = 'vista_edit_user'),

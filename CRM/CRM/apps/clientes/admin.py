@@ -6,4 +6,6 @@ admin.site.register(Persona)
 admin.site.register(User_profile)
 admin.site.register(Paciente)
 admin.site.register(Interesado)
+admin.site.register(Producto)
+
 # Register your models here.

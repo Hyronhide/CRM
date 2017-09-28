@@ -26,6 +26,8 @@
 				<p><b>Ciudad: </b>{{ interesado.ciudad }}</p>
 				<p><b>Direccion: </b>{{ interesado.direccion }}</p>					
 				<p><b>Procedencia: </b>{{ interesado.interesado.procedencia }}</p>
+				<p><b>Producto: </b>{{ interesado.interesado.producto.nombre }}</p>
+				<p><b>Valor Estimado del Producto: </b>{{ interesado.interesado.producto.precio }}</p>
 				<!--<p><b>Nivel de interes: </b>{{ interesado.interesado.nivel_interes }}</p>-->
 				<br><div class="divider"></div>
 				<form action="." method = "POST" enctype="multipart/form-data">

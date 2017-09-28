@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	<title>Agregar un Producto</title>
+{% endblock  %}
+
+{% block content %}
+	<form action="." method = "POST" enctype="multipart/form-data" align="center">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button class="btn btn-danger" type="submit" > Guardar </button>
+		<input class="btn btn-danger" type="reset" value="Limpiar">
+	</form>
+	<br>
+	{{ info }}
+{% endblock  %}

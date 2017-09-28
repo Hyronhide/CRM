@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Editar Producto
+{% endblock  %}
+
+{% block content %}
+	<form action="." method = "POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" class="btn btn-success"> Guardar </button>
+		<input class="btn btn-danger" type="reset" value="Limpiar">
+		<a href="javascript:window.history.back();" class="btn btn-sm btn-curious-blue-variant-1">Cancelar</a>
+	</form>
+	<br>
+	{{ info }}
+{% endblock  %}

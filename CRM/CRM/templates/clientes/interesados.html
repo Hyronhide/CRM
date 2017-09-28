@@ -31,6 +31,7 @@
 							<th>Apellidos</th>									
 							<th>Cedula</th>
 							<th>Teléfono</th>
+							<th>Producto</th>
 							<th></th>
 							<th></th>
 							<th></th>												
@@ -43,6 +44,7 @@
 							<td>{{ i.apellidos }}</td>				
 							<td>{{ i.cedula }}</td>	
 							<td>{{ i.movil }}</td>		
+							<td>{{ i.interesado.producto.nombre }}</td>		
 							<td><a href="/ver_interesado/{{i.id}}" title="">(Ver)</a></td>		
 							<td><a href="/editar_interesado/{{i.id}}" title="">(Editar)</a></td>	
 							</td>					
@@ -65,6 +67,7 @@
 							<th>Apellidos</th>										
 							<th>Cedula</th>
 							<th>Teléfono</th>
+							<th>Producto</th>
 							<th></th>
 							<th></th>
 							<th></th>												
@@ -76,7 +79,8 @@
 							<td>{{ i.nombres }}</td>
 							<td>{{ i.apellidos }}</td>				
 							<td>{{ i.cedula }}</td>	
-							<td>{{ i.movil }}</td>		
+							<td>{{ i.movil }}</td>
+							<td>{{ i.interesado.producto.nombre }}</td>			
 							<td><a href="/ver_interesado/{{i.id}}" title="">(Ver)</a></td>		
 							<td><a href="/editar_interesado/{{i.id}}" title="">(Editar)</a></td>	
 							</td>					

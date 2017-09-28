@@ -7,12 +7,12 @@ from django.conf import settings
 import os
 
 from django.db import models
-
+'''
 TIPO =(
 	('Paciente','Paciente'),
 	('Interesado','Interesado'),
 	)
-
+'''
 GENERO =(
 	('Masculino','Masculino'),
 	('Femenino','Femenino'),
@@ -37,7 +37,7 @@ class User_profile(models.Model):
 	empresa  = models.CharField(max_length = 30)	
 	
 	def __unicode__(self):
-		return "Nombre: %s %s; Usuario: %s" % (self.user.first_name, self.user.last_name, self.user.username)
+		return "Usuario: %s, Empresa: %s"% (self.user.username,self.empresa)
 
 
 class Persona(models.Model):
@@ -68,13 +68,33 @@ class Paciente(models.Model):
 
 	def __unicode__(self):
 		return "%s %s"  % (self.persona.nombres,self.persona.apellidos) 
+		
+class Producto (models.Model):
+	'''
+	def url(self, filename):
+		ruta = "MultimediaData/Producto/%s/%s"%(self.nombre, str(filename))
+		return ruta
+	'''
+	nombre		= models.CharField(max_length = 100)
+	descripcion = models.TextField(max_length = 500)	
+	#imagen		= models.ImageField(upload_to = url, null = True, blank = True)	
+	precio  	= models.DecimalField(max_digits = 12, decimal_places = 2)
+	
+
+	def __unicode__ (self):
+		return self.nombre 	
+
 
 class Interesado(models.Model):	
 
 	persona = models.OneToOneField(Persona)	
 	procedencia = models.CharField(max_length = 50)
 	nivel_interes = models.CharField(max_length = 30,choices = INTERES)
+	producto = models.ForeignKey(Producto)
 	
 
 	def __unicode__(self):
 		return "%s %s"  % (self.persona.nombres,self.persona.apellidos) 		
+
+
+			

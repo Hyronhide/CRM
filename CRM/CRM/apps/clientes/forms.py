@@ -2,12 +2,12 @@
 from django import forms
 from django.contrib.auth.models import User 
 from CRM.apps.clientes.models import *
-
+'''
 TIPO =(
 	('Paciente','Paciente'),
 	('Interesado','Interesado'),
 	)
-
+'''
 GENERO =(
 	('Masculino','Masculino'),
 	('Femenino','Femenino'),
@@ -62,7 +62,7 @@ class Register_Persona_Interesado_Form(forms.ModelForm):
 
 	class Meta:
 		model = Interesado
-		fields = ['procedencia','nivel_interes']	
+		fields = ['procedencia','nivel_interes','producto']	
 		
 	procedencia = forms.CharField(label="Procedencia",widget=forms.TextInput())	
 	#nivel_interes = forms.CharField(label="Nivel de interes",widget=forms.TextInput())
@@ -119,3 +119,9 @@ class PasswordForm(forms.ModelForm):
 			pass 
 		else:
 			raise forms.ValidationError('Password no coinciden')				
+
+class add_product_form( forms.ModelForm ):
+	class Meta:
+		model = Producto
+		#se excluye el status por que en el modelo lo ponemos default=True
+		fields = '__all__'

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Producto
+{% endblock %}
+
+{% block content %}
+	<div align="center">
+		<h2 >{{ producto.nombre }}</h2>
+		{% if producto.imagen %}
+			<img  src="/media/{{ producto.imagen }}"  width="300px" height="200px" >		
+		{% endif %}
+	</div>		
+	<br>	
+	<p><b>Descripcion: </b>{{ producto.descripcion }}</p>
+	<p><b>Precio: </b>{{ producto.precio }}</p>		
+	
+	<br>
+	<a href="/productos/page/1">Mostrar lista de Productos</a>
+	
+	
+{% endblock  %}	
