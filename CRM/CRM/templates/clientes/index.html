@@ -9,6 +9,83 @@
         <!--<div id="car" class="card z-depth-3 hoverable" >
         	<h5 id="cn" align="center ">Bienvenido</h5>
 		</div>-->
-		<h1 id="cn" align="center ">Bienvenido</h5>
+	
+		<br>
+		<div>
+			<div float="left" aling="center"> 
+				<h5 id="cn" align="center "><p>ULTIMOS PACIENTES</p></h5>
+				{% if pacientes %}						
+				<!--<li> Tipo de pqrs:{{ p.tipo_pqrs}}; Mensaje: {{ p.mensaje}}</li>-->
+					<table class="col s12 bordered responsive-table highlight">
+						<theader>
+							<tr>
+								<th>Nombres</th>	
+								<th>Apellidos</th>										
+								<th>Cedula</th>
+								<th>Teléfono</th>
+								<th></th>
+								<th></th>
+								<th></th>												
+							</tr>
+						</theader>					
+						<tbody>
+							{% for i in pacientes %}
+							<tr>
+								<td>{{ i.nombres }}</td>
+								<td>{{ i.apellidos }}</td>				
+								<td>{{ i.cedula }}</td>	
+								<td>{{ i.movil }}</td>		
+								<td><a href="/ver_paciente/{{i.id}}" title="">(Ver)</a></td>		
+								<td><a href="/editar_paciente/{{i.id}}" title="">(Editar)</a></td>	
+								</td>					
+							</tr>
+							{% endfor %}			
+						</tbody>							
+					</table>
+										
+				{% else %}
+					<center><p><h5>No existen pacientes registrados</h5></p></center>				
+				{% endif %}
+			</div>
+
+			<div float="left" aling="center">
+				<h5 id="cn" align="center "><p>ULTIMOS INTERESADOS</p></h5>
+				{% if interesados %}						
+				<!--<li> Tipo de pqrs:{{ p.tipo_pqrs}}; Mensaje: {{ p.mensaje}}</li>-->
+					<table class="col s12 bordered responsive-table highlight">
+						<theader>
+							<tr>
+								<th>Nombres</th>	
+								<th>Apellidos</th>										
+								<th>Cedula</th>
+								<th>Teléfono</th>
+								<th>Producto</th>
+								<th></th>
+								<th></th>
+								<th></th>												
+							</tr>
+						</theader>					
+						<tbody>
+							{% for i in interesados %}
+							<tr>
+								<td>{{ i.nombres }}</td>
+								<td>{{ i.apellidos }}</td>				
+								<td>{{ i.cedula }}</td>	
+								<td>{{ i.movil }}</td>
+								<td>{{ i.interesado.producto.nombre }}</td>			
+								<td><a href="/ver_interesado/{{i.id}}" title="">(Ver)</a></td>		
+								<td><a href="/editar_interesado/{{i.id}}" title="">(Editar)</a></td>	
+								</td>					
+							</tr>
+							{% endfor %}			
+						</tbody>							
+					</table>
+										
+				{% else %}
+					<center><p><h5>No existen personas registradas</h5></p></center>				
+				{% endif %}
+			</div>
+		</div>
+
 
 {% endblock  %}

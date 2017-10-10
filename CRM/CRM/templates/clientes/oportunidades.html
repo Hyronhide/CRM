@@ -34,7 +34,7 @@
 				<td>{{ i.producto.nombre }}</td>	
 				<td>{{ i.producto.precio }}</td>
 				<td>{{ i.nivel_interes}}</td>				
-				<td><a class="btn" href="/ver_interesado/{{i.id}}" title="">Ver</a></td>					
+				<td><a class="btn" href="/ver_interesado/{{i.persona.id}}" title="">Ver</a></td>					
 				</td>					
 			</tr>
 			{% endfor %}			
@@ -49,19 +49,19 @@
 	<div class = "pagination">
 		<div class = "pagination pagination-centered">
 			<ul class="pag">
-				<li><a href="/interesados/page/1"> {{primera}} </a></li>
+				<li><a href="/oportunidades/page/1"> {{primera}} </a></li>
 				{% if interesados.has_previous %}
-					<li><a href="/interesados/page/{{ interesados.previous_page_number }}" > Anterior</a></li>
+					<li><a href="/oportunidades/page/{{ interesados.previous_page_number }}" > Anterior</a></li>
 				{% else %}
 					<li ><a href="#">Anterior</a></li>
 				{% endif %}
 
 				{% if interesados.has_next %}
-					<li><a href="/interesados/page/{{ interesados.next_page_number }}" > Siguiente</a></li>
+					<li><a href="/oportunidades/page/{{ interesados.next_page_number }}" > Siguiente</a></li>
 				{% else %}
 					<li><a href="#"> Siguiente</a></li>	
 				{% endif %}
-					<li><a href="/interesados/page/{{ interesados.paginator.num_pages }}"> {{ultima}} </a></li>
+					<li><a href="/oportunidades/page/{{ interesados.paginator.num_pages }}"> {{ultima}} </a></li>
 			</ul>			
 		</div>		
 	</div>

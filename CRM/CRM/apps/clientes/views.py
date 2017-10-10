@@ -18,8 +18,24 @@ from django.core.files import File
 import os 
 
 def index_view(request): 
+	limite_final_pa= Persona.objects.filter(tipo="Paciente").count()
+	limite_final_in= Persona.objects.filter(tipo="Interesado").count()
+
+	if limite_final_in <= 2:
+		lista_interesados= Persona.objects.filter(tipo="Interesado")
+	else:
+		limite_in = limite_final_in -2
+		lista_interesados= Persona.objects.filter(tipo="Interesado")[limite_in:limite_final_in]
+
+	if limite_final_pa <= 2:
+		lista_pacientes= Persona.objects.filter(tipo="Paciente")
+	else:
+		limite_pa = limite_final_pa - 2	
+		lista_pacientes= Persona.objects.filter(tipo="Paciente")[limite_pa:limite_final_pa]		
 	
-	return render(request,'clientes/index.html')
+	
+	ctx = {'pacientes':lista_pacientes,'interesados':lista_interesados}	
+	return render(request,'clientes/index.html',ctx)
 
 def login_view(request):
 	mensaje = ""
@@ -450,7 +466,7 @@ def interesado_a_paciente_view(request,id_interesado):
 	ctx = {'form_paciente':form_paciente,'paciente':per}
 	return render_to_response('clientes/interesado_a_paciente.html',ctx,context_instance=RequestContext(request))
 
-def oportunidades_view(request):
+def oportunidades_view(request,pagina):
 	lista_interesados = Interesado.objects.filter(persona__tipo="Interesado",nivel_interes= "5: Muy alto")
 	primera = "<<Primera"
 	ultima = "Ultima>>"	

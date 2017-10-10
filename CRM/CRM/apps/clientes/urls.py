@@ -21,7 +21,7 @@ urlpatterns = [
 	url(r'^eliminar_interesado/(?P<id_interesado>.*)/$',eliminar_interesado_view , name = 'vista_eliminar_interesado'),
 	url(r'^confirmar_eliminar_interesado/(?P<id_interesado>.*)/$',confirmar_eliminar_interesado_view , name = 'vista_confirmar_eliminar_interesado'),
 	url(r'^interesado_a_paciente/(?P<id_interesado>.*)/$',interesado_a_paciente_view, name = 'vista_interesado_a_paciente'),
-	url(r'^oportunidades/$',oportunidades_view, name = 'vista_oportunidades'),
+	url(r'^oportunidades/page/(?P<pagina>.*)/$',oportunidades_view, name = 'vista_oportunidades'),
 
 	### REPORTES ###
 	url(r'^reporte_exel_pacientes/$',reporte_exel_pacientes_view, name = 'vista_reporte_exel_pacientes'),
