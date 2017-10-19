@@ -29,5 +29,5 @@ urlpatterns = [
 ]
 urlpatterns += static(CRM.settings.STATIC_URL, document_root=CRM.settings.STATIC_ROOT)
 
-if settings.DEBUG is True:
+if CRM.settings.DEBUG is True:
     urlpatterns += static(CRM.settings.MEDIA_URL, document_root=CRM.settings.MEDIA_ROOT)
