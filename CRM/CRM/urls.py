@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 
 
-import settings
+#import settings
 
 urlpatterns = [
 	url(r'', include('CRM.apps.clientes.urls')),
