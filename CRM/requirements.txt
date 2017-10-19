@@ -1,5 +1,4 @@
 Django==1.9.6
-Pillow==1.2
 dj-static==0.0.6
 gunicorn==18.0
 dj-database-url==0.4.0
