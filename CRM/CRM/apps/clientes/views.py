@@ -354,7 +354,7 @@ def interesados_view(request,pagina):
 	},context_instance=RequestContext(request))	
 
 def ver_interesado_view(request, id_interesado):
- 	info = ""	
+	info = ""	
 	info_enviado = False	
 	persona = Persona.objects.get(id = id_interesado)
 	interesado = Interesado.objects.get(persona=persona)
@@ -569,7 +569,7 @@ def reporte_exel_interesados_view(request):
 	ws['L1'] = 'NIVEL INTERES'
 	ws['M1'] = 'PRODUCTO'
 	ws['N1'] = 'VALOR ESTIMADO'
-	     
+		 
 	cont=2
 	#Recorremos el conjunto de personas y vamos escribiendo cada uno de los datos en las celdas
 	for persona in lista_consultar:
