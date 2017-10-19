@@ -22,11 +22,12 @@ import CRM.settings
 
 urlpatterns = [
 	url(r'', include('CRM.apps.clientes.urls')),
+    url(r'', include('CRM.apps.historial.urls')),
     #url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),	
 	url(r'^admin/doc/', include('django.contrib.admindocs.urls')), 
     url(r'^admin/', admin.site.urls),    
 ]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(CRM.settings.STATIC_URL, document_root=CRM.settings.STATIC_ROOT)
 
 if settings.DEBUG is True:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(CRM.settings.MEDIA_URL, document_root=CRM.settings.MEDIA_ROOT)
